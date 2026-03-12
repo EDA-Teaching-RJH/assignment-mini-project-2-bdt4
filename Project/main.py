@@ -8,6 +8,8 @@ from display import (
 )
 from search import search_games_by_title
 
+from stats import display_statistics
+
 def main():
     #loads all the games from the CSV
     games = load_games("games.csv")
@@ -20,7 +22,8 @@ def main():
         print("3. View wishlist") 
         print("4. View backlog")
         print("5. Search games by title")
-        print("6. Exit")
+        print("6. Show statistics")
+        print("7. Exit")
 
         #user input for the choice
         choice = input("\nChoose an option: \n")
@@ -42,12 +45,15 @@ def main():
             search_games_by_title(games)    
 
         elif choice == "6":
+            display_statistics(games)
+
+        elif choice == "7":
             print("Goodbye.")
             break
 
         #Invalid output handler with included choice
         else:
-            print( f'Option "{choice}" is not valid, please choose a number between 1-5')
+            print( f'Option "{choice}" is not valid, please choose a number between 1-7')
 
 
 if __name__ == "__main__":

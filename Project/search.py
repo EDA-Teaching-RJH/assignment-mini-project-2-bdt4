@@ -11,15 +11,16 @@ def search_games_by_title(games):
     print("--------------")
 
     found = False
+
     try:
 
-        #loop through all of the games to check for a match
+        #loop through all of the games to check for a match, while guarding against errors
         for game in games:
             if re.search(gamequery, game.title, re.IGNORECASE):
                 print(game)
                 found = True
         if not found:
             print(f'No games matching "{gamequery}" were found.')
-            
+
     except re.error:
         print(f'"{gamequery}" is not a valid search term')

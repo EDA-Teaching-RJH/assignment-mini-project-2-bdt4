@@ -9,6 +9,7 @@ def load_games(filename):
     with open(filename, newline="", encoding ="utf-8") as file:
         reader = csv.DictReader(file)
 
+        #convert CSV values into correct python data types
         for row in reader:
             game = Game(
                 row ["title"],
@@ -16,9 +17,9 @@ def load_games(filename):
                 row["store"],
                 row["ownership"],
                 row["status"],
-                row["rating"],
-                row["hours_played"],
-                row["completion_percentage"],
+                int(row["rating"]),
+                float(row["hours_played"]),
+                int(row["completion_percentage"]),
                 row["priority"],
                 row["date_added"],
                 row["notes"]
