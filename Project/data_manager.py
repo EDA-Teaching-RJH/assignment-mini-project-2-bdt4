@@ -1,5 +1,5 @@
 #game backlog tracker, which allows me to double dip, using it as my project but also for my personal uses
-
+#responsible for loading the data from my csv and converts the rows to an object the game file can use
 import csv
 from game import Game
 
@@ -25,5 +25,6 @@ def load_games(filename):
             )
             
             games.append(game)
-
+            #Add's a game to the list
         return games
+        #returns all the games when the function is called

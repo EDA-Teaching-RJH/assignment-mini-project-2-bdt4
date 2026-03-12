@@ -1,3 +1,4 @@
+#Game class that prints out game entries, will be more complex later
 class Game:
     def __init__(self, title, genre, store, ownership, status, rating, hours_played, completion_percentage, priority, date_added, notes):
         self.title = title
@@ -12,5 +13,6 @@ class Game:
         self.date_added = date_added
         self.notes = notes
 
+#basic printout for now
     def __str__(self):
         return f"{self.title} ({self.genre}) - {self.status}"
