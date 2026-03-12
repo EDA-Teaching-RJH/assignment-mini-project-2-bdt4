@@ -6,6 +6,7 @@ from display import (
     display_wishlist_games,
     display_backlog_games
 )
+from search import search_games_by_title
 
 def main():
     #loads all the games from the CSV
@@ -18,7 +19,8 @@ def main():
         print("2. View completed games")
         print("3. View wishlist") 
         print("4. View backlog")
-        print("5. Exit")
+        print("5. Search games by title")
+        print("6. Exit")
 
         #user input for the choice
         choice = input("\nChoose an option: \n")
@@ -34,9 +36,12 @@ def main():
             display_backlog_games(games)
 
         elif choice == "4":
-            display_wishlist_games(games)       
+            display_wishlist_games(games)   
 
         elif choice == "5":
+            search_games_by_title(games)    
+
+        elif choice == "6":
             print("Goodbye.")
             break
 
