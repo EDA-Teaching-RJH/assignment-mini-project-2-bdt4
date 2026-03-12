@@ -1,5 +1,6 @@
 #Main file where all functions and classes are called
-from data_manager import load_games
+from edit import add_game
+from data_manager import load_games, save_games
 from display import (
     display_games,
     display_completed_games,
@@ -9,6 +10,8 @@ from display import (
 from search import search_games_by_title
 
 from stats import display_statistics
+
+
 
 def main():
     #loads all the games from the CSV
@@ -23,7 +26,9 @@ def main():
         print("4. View backlog")
         print("5. Search games by title")
         print("6. Show statistics")
-        print("7. Exit")
+        print("7. Add a game")
+        print("8. Save games")
+        print("9. Exit")
 
         #user input for the choice
         choice = input("\nChoose an option: \n")
@@ -48,12 +53,19 @@ def main():
             display_statistics(games)
 
         elif choice == "7":
+            add_game(games)
+
+        elif choice == "8":
+            save_games("games.csv", games)
+            print("Games saved successfully.")
+
+        elif choice == "9":
             print("Goodbye.")
             break
 
         #Invalid output handler with included choice
         else:
-            print( f'Option "{choice}" is not valid, please choose a number between 1-7')
+            print( f'Option "{choice}" is not valid, please choose a number between 1-9')
 
 
 if __name__ == "__main__":

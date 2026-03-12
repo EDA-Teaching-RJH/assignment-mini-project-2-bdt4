@@ -29,3 +29,38 @@ def load_games(filename):
             #Add's a game to the list
         return games
         #returns all the games when the function is called
+
+#function to save the file as csv, allowing editing from the terminal itself
+def save_games(filename, games):
+    with open(filename, "w", newline="", encoding="utf-8") as file:
+        writer =csv.writer(file)
+
+        #write header row
+        writer.writerow([
+            "title",
+            "genre",
+            "store",
+            "ownership",
+            "status",
+            "rating",
+            "hours_played",
+            "completion_percentage",
+            "priority",
+            "date_added",
+            "notes"
+        ])
+
+        for game in games:
+            writer.writerow([
+                game.title,
+                game.genre,
+                game.store,
+                game.ownership,
+                game.status,
+                game.rating,
+                game.hours_played,
+                game.completion_percentage,
+                game.priority,
+                game.date_added,
+                game.notes
+            ])
