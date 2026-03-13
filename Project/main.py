@@ -1,5 +1,5 @@
 #Main file where all functions and classes are called
-from edit import add_game, delete_game
+from edit import add_game, delete_game, edit_game
 from data_manager import load_games, save_games
 from display import (
     display_games,
@@ -27,8 +27,8 @@ def main():
         print("5. Search games by title")
         print("6. Show statistics")
         print("7. Add a game")
-        print("8. Delete a game")
-        print("9. Save games")
+        print("8. Edit a game")
+        print("9. Delete a game")
         print("10. Exit")
 
         #user input for the choice
@@ -55,13 +55,18 @@ def main():
 
         elif choice == "7":
             add_game(games)
-
-        elif choice =="8":
-            delete_game(games)
-
-        elif choice == "9":
             save_games("games.csv", games)
-            print("Games saved successfully.")
+            print ("Changes saved.")
+
+        elif choice == "8":
+            edit_game(games)
+            save_games("games.csv", games)
+            print("Changes saved.")
+
+        elif choice =="9":
+            delete_game(games)
+            save_games("games.csv", games)
+            print("Changes saved.")
 
         elif choice == "10":
             print("Goodbye.")

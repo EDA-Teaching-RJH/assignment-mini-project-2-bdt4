@@ -119,10 +119,10 @@ def delete_game(games):
 
     while True:
 
-        user_input = input(f"Enter a number between 1 and {len(games)}: ")       
+        delete_input = input(f"Enter a number between 1 and {len(games)}: ")       
                             
         try:
-            choice = int(user_input)
+            choice = int(delete_input)
 
              #Checking if the number chosen is valid
             if 1 <= choice <= len(games):
@@ -130,7 +130,109 @@ def delete_game(games):
                 print(f'\n"{deleted_game.title}" was deleted successfully.')
                 return
                         
-            print(f'"{user_input}" is not valid. Please enter a number between 1 and {len(games)}.')
+            print(f'"{delete_input}" is not valid. Please enter a number between 1 and {len(games)}.')
 
         except ValueError:
-            print(f'"{user_input}" is not valid. Please enter a number between 1 and {len(games)}.')
+            print(f'"{delete_input}" is not valid. Please enter a number between 1 and {len(games)}.')
+
+def edit_game(games):
+
+    #Check if there any games to edit
+    if len(games) == 0:
+        print("There are no games to edit.")
+        return
+
+    print("\n---Edit a Game---")
+
+    #Display games so user can choose one
+    for index, game in enumerate(games, start=1):
+        print(f"{index}. {game.title} ({game.genre}) - {game.status}")
+
+    print(f"There are currently {len(games)} games.")
+
+    #Ask the user to choose a game
+    while True:
+        edit_input = input(f"Enter a number between 1 and {len(games)}: ")
+
+        try:
+            choice = int(edit_input)
+
+            if 1 <= choice <= len(games):
+                selected_game = games[choice - 1]
+                break
+
+            print(f'"{edit_input}" is not valid. Please enter a number between 1 and {len(games)}.')
+
+        except ValueError:
+            print(f'"{edit_input}" is not valid. Please enter a number between 1 and {len(games)}.')
+
+    #Showing editable fields
+    print(f'\nEditing "{selected_game.title}"')
+    print("1. Title")
+    print("2. Genre")
+    print("3. Store")
+    print("4. Ownership")
+    print("5. Status")
+    print("6. Rating")
+    print("7. Hours played")
+    print("8. Completion percentage")
+    print("9. Priority")
+    print("10. Notes")
+
+    #Asking which field to edit
+    while True:
+        field_input = input("Choose a field to edit (1-10): ")
+
+        try: 
+            field_choice = int(field_input)
+
+            if 1 <= field_choice <= 10:
+                break
+        
+            print(f'"{field_input}" is not valid. Please choose a number between 1 and 10')
+
+        except ValueError:
+            print(f'"{field_input}" is not valid. Please enter a number between 1 and 10.')
+    #Update chosen field, using validation
+    if field_choice == 1:
+        selected_game.title = get_non_empty_input("Enter new title: ")
+
+    elif field_choice == 2:
+        selected_game.genre = get_non_empty_input("Enter new genre: ")
+
+    elif field_choice == 3:
+        selected_game.store = get_non_empty_input("Enter new store: ")
+
+    elif field_choice == 4:
+        selected_game.ownership = get_valid_choice(
+            "Enter ownership (Owned, Wishlist, Game Pass): ",
+            ["Owned", "Wishlist", "Game Pass"]
+        )
+
+    elif field_choice == 5:
+        selected_game.status = get_valid_choice(
+            "Enter status (Completed, In Progress, Not started): "
+            ["Completed", "In Progress", "Not Started"]
+        )
+
+    elif field_choice == 6:
+        selected_game.rating = get_valid_int("Enter new rating (0-10):", 0, 10)
+
+    elif field_choice == 7:
+        selected_game.hours_played = get_valid_float("Enter new hours played: ", 0)
+
+    elif field_choice == 8:
+        selected_game.completion_percentage = get_valid_int(
+            "Enter new completion percentage (0-100): ", 0, 100
+    )
+        
+    elif field_choice == 9:
+        selected_game.priority = get_valid_choice(
+            "Enter priority(Low, Medium, High): ",
+            ["Low", "Medium", "High"]
+        )
+
+    elif field_choice == 10:
+        selected_game.notes = input("Enter new notes: ").strip()
+
+    print(f'\n"{selected_game.title}" was updated successfully.')
