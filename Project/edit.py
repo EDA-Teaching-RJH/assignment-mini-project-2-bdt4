@@ -101,3 +101,36 @@ def add_game(games):
     games.append(new_game)
 
     print(f'\n"{title}" was added successfully.')
+
+def delete_game(games):
+
+    #check if there are any games in the manager
+    if len(games) == 0:
+        print("There are no games to delete")
+        return
+        
+    print("\n ---Delete a Game ---")
+
+    #Display games using a numbered system for deletion
+    for index, game in enumerate(games, start=1):
+        print(f"{index}. {game.title} ({game.genre}) - {game.status}")
+
+    print(f"There are currently {len(games)} games.")
+
+    while True:
+
+        user_input = input(f"Enter a number between 1 and {len(games)}: ")       
+                            
+        try:
+            choice = int(user_input)
+
+             #Checking if the number chosen is valid
+            if 1 <= choice <= len(games):
+                deleted_game = games.pop(choice - 1)
+                print(f'\n"{deleted_game.title}" was deleted successfully.')
+                return
+                        
+            print(f'"{user_input}" is not valid. Please enter a number between 1 and {len(games)}.')
+
+        except ValueError:
+            print(f'"{user_input}" is not valid. Please enter a number between 1 and {len(games)}.')
