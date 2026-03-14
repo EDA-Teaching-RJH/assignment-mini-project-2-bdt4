@@ -1,55 +1,35 @@
-#Allows me to display stats about the game backlog
+class StatisticsManager:
+    #finds the games to use in stats
+    def __init__(self, games):
+        self.games = games
 
-#setting the base stats to be updated from the csv later
-def display_statistics(games):
-    total_games = len(games)
-    completed_games = 0
-    in_progress_games = 0
-    wishlist_games = 0
-    backlog_games = 0
-    total_hours = 0
-    ratings = []
-    completion_values = []
 
-    for game in games:
-        total_hours += float(game.hours_played)
+    #Returns the total number of games
+    def total_games(self):
+        return len(self.games)
 
-        if game.rating > 0:
-            ratings.append(int(game.rating))
+    #Returns the number of completed games
+    def completed_games_count(self):
+        return sum(1 for game in self.games if game.status == "Completed")
 
-        completion_values.append(game.completion_percentage)
+    #Returns the number of in progress games
+    def in_progress_games_count(self):
+        return sum(1 for game in self.games if game.status == "In Progress")
 
-        if game.status == "Completed":
-            completed_games += 1
+    #Returns the number of wishlist games
+    def wishlist_games_count(self):
+        return sum(1 for game in self.games if game.ownership == "Wishlist")
 
-        if game.status == "In Progress":
-            in_progress_games += 1
+    #Returns total hours played across all games
+    def total_hours_played(self):
+        return sum(game.hours_played for game in self.games)
 
-        if game.ownership == "Wishlist":
-            wishlist_games += 1
+    #Returns the average rating
+    def average_rating(self):
+        ratings = [game.rating for game in self.games if game.rating > 0]
+        return sum(ratings) / len(ratings) if ratings else 0
 
-        if game.ownership != "Wishlist" and game.status == "Not Started":
-            backlog_games += 1
-
-    #calculate average rating
-    if len(ratings) > 0:
-        average_rating = sum(ratings) / len(ratings)
-    else:
-        average_rating = 0
-    #calculate average completion %
-    if len(completion_values) > 0:
-        average_completion = sum(completion_values) / len(completion_values)
-    else:
-        average_completion = 0
-
-    #printing stats
-    print("\nGame Statistics")
-    print("---------------")
-    print(f"{'Total games':25} {total_games}")
-    print(f"{'Completed games':25} {completed_games}")
-    print(f"{'In progress games':26}{in_progress_games}")
-    print(f"{'Backlog games':25} {backlog_games}")
-    print(f"{'Wishlist games':25} {wishlist_games}")
-    print(f"{'Total hours played':25} {total_hours:.1f}")
-    print(f"{'Average rating':25} {average_rating:.1f}/10")
-    print(f"{'Average completion:':26}{average_completion:.1f}%")
+    #Returns the average completion percentage
+    def average_completion(self):
+        completions = [game.completion_percentage for game in self.games]
+        return sum(completions) / len(completions) if completions else 0
