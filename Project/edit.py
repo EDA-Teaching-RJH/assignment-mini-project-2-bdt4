@@ -1,5 +1,36 @@
 from datetime import datetime
 from game import Game
+from data_manager import save_games
+
+# Manage menu for adding, editing, and deleting games
+def manage_menu(games):
+
+    while True:
+        print("\n--- Manage Menu ---")
+        print("1. Add a game")
+        print("2. Edit a game")
+        print("3. Delete a game")
+        print("4. Return to main menu")
+
+        choice = input("Choose an option: ").strip()
+
+        if choice == "1":
+            add_game(games)
+            save_games("games.csv", games)
+
+        elif choice == "2":
+            edit_game(games)
+            save_games("games.csv", games)
+
+        elif choice == "3":
+            delete_game(games)
+            save_games("games.csv", games)
+
+        elif choice == "4":
+            break
+
+        else:
+            print(f'"{choice}" is not valid. Please choose 1-4.')
 
 def get_non_empty_input(prompt):
     while True:
@@ -100,7 +131,8 @@ def add_game(games):
     #Add the new game to the existing list
     games.append(new_game)
 
-    print(f'\n"{title}" was added successfully.')
+    print("\nGame added successfully:")
+    print(new_game.details())
 
 def delete_game(games):
 
@@ -126,10 +158,24 @@ def delete_game(games):
 
              #Checking if the number chosen is valid
             if 1 <= choice <= len(games):
-                deleted_game = games.pop(choice - 1)
-                print(f'\n"{deleted_game.title}" was deleted successfully.')
-                return
-                        
+                selected_game = games[choice - 1]
+
+                while True:
+                    confirm = input(f'Are you sure you want to delete "{selected_game.title}"? (y/n): ').strip().lower()
+
+                    if confirm == "y":
+                        deleted_game = games.pop(choice - 1)
+                        print(f'\n"{deleted_game.title}" was deleted successfully.')
+                        return
+                    
+                    elif confirm == "n":
+                        print("Deletion cancelled.")
+                        return
+                
+                    else:
+                        print(f'"{confirm}" is not valid. Please enter y or n.')
+
+            
             print(f'"{delete_input}" is not valid. Please enter a number between 1 and {len(games)}.')
 
         except ValueError:
@@ -235,4 +281,4 @@ def edit_game(games):
     elif field_choice == 10:
         selected_game.notes = input("Enter new notes: ").strip()
 
-    print(f'\n"{selected_game.title}" was updated successfully.')
+    print(f'\n"{selected_game.details()}" was updated successfully.')
