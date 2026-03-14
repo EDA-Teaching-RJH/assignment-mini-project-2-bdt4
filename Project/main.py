@@ -4,6 +4,7 @@ from data_manager import load_games, save_games
 from display import view_menu
 from search import search_menu
 from stats import display_statistics
+from recommend import recommend_menu
 
 
 
@@ -18,7 +19,8 @@ def main():
         print("2. Search games menu")
         print("3. Manage games menu")
         print("4. Show statistics")
-        print("5. Exit")
+        print("5. Recommendations")
+        print("6. Exit")
 
         #user input for the choice
         choice = input("\nChoose an option: \n")
@@ -37,12 +39,15 @@ def main():
             display_statistics(games)
 
         elif choice == "5":
+            recommend_menu(games)
+
+        elif choice == "6":
             print("Goodbye.")
             break
 
         #Invalid output handler with included choice
         else:
-            print( f'Option "{choice}" is not valid, please choose a number between 1-5')
+            print( f'Option "{choice}" is not valid, please choose a number between 1-6')
 
 
 if __name__ == "__main__":
