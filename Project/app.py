@@ -384,7 +384,7 @@ class BacklogApp:
     #guard against empty text input
     def get_non_empty_input(self, prompt):
         while True:
-            value = input(prompt).strip()
+            value = input(prompt).strip().title()
             if value:
                 return value
             print("Input cannot be empty. Please try again.")
