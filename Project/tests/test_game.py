@@ -3,7 +3,7 @@
 from game import Game
 #creating a  game object to use for testing
 def make_game():
-    return Game(
+        return Game(
         "DiRT 4",
         "Racing",
         "Steam",
@@ -15,7 +15,7 @@ def make_game():
         "Low",
         "16/03/2026",
         "testtttttttting"
-    )
+        )
 
 def test_game_creation():
     game = make_game()
@@ -60,7 +60,7 @@ def test_game_details():
     assert "Store: Steam" in details
     assert "Ownership: Owned" in details
     assert "Status: In Progress" in details
-    assert "Rating: 7/10"
+    assert "Rating: 7/10" in details
     assert "Hours Played: 28.7" in details
     assert "Completion: 50%" in details
 
