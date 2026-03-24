@@ -1,5 +1,5 @@
 class Game:
-    #creates a game object from the CSV
+    #creates a game object from the CSV and stores the data for use throughout the project
     def __init__(self, title, genre, store, ownership, status,
                  rating, hours_played, completion_percentage,
                  priority, date_added, notes):

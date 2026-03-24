@@ -142,7 +142,6 @@ class BacklogApp:
 
     #view feature
     
-
     #displays a list of games depending on the option chosen
     def display_games(self, games, heading):
         print(f"\n--- {heading} ---\n")
@@ -165,7 +164,7 @@ class BacklogApp:
         print("--------------")
 
         try:
-            results = self.backlog.search_by_field_regex(field_name, query, re)
+            results = self.backlog.search_by_field_regex(field_name, query)
             self.display_games(results, f"{label.title()} Search Results")
         except re.error:
             print(f'"{query}" is not a valid search term.')

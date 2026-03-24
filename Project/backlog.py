@@ -1,3 +1,6 @@
+import re
+
+
 class GameBacklog:
     # starts an empty backlog
     def __init__(self):
@@ -41,12 +44,12 @@ class GameBacklog:
 
 
     #Searches a field using regex and finds matching games
-    def search_by_field_regex(self, field_name, pattern, re_module):
+    def search_by_field_regex(self, field_name, pattern):
         matches = []
 
         for game in self.games:
             value = str(getattr(game, field_name))
-            if re_module.search(pattern, value, re_module.IGNORECASE):
+            if re.search(pattern, value, re.IGNORECASE):
                 matches.append(game)
 
         return matches

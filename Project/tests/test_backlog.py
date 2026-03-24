@@ -2,7 +2,7 @@ import re
 from game import Game
 from backlog import GameBacklog
 
-#creating a  game object to use for testing
+#creating a game object to use for testing
 
 def make_game(
     title="DiRT 4",
