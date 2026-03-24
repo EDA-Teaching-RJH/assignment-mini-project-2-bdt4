@@ -154,7 +154,7 @@ def test_regex_title():
         notes="was aight" 
     ))
 
-    result = backlog.search_by_field_regex("title", "hogwarts", re)
+    result = backlog.search_by_field_regex("title", "hogwarts")
 
     assert len(result) == 1
     assert result[0].title == "Hogwarts Legacy"
@@ -176,7 +176,7 @@ def test_regex_genre():
         notes="was aight" 
     ))
 
-    result = backlog.search_by_field_regex("genre", "action", re)
+    result = backlog.search_by_field_regex("genre", "action")
 
     assert len(result) == 1
     assert result[0].title == "Hogwarts Legacy"
@@ -196,7 +196,7 @@ def test_regex_no_match():
         priority="Low",
         notes="was aight" ))
 
-    result = backlog.search_by_field_regex("title", "elden", re)
+    result = backlog.search_by_field_regex("title", "elden")
 
     assert result == []
 
@@ -216,7 +216,7 @@ def test_regex_case_insensitive():
         notes="was aight" 
     ))
 
-    result = backlog.search_by_field_regex("title", "HOGWARTS", re)
+    result = backlog.search_by_field_regex("title", "HOGWARTS")
 
     assert len(result) == 1
     assert result[0].title == "Hogwarts Legacy"
